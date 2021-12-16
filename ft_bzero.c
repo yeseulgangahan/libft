@@ -2,13 +2,13 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*sp;
+	unsigned char	*s2;
 
-	sp = (char *)s;
+	s2 = s;
 	while (n)
 	{
-		*sp = 0;
-		sp++;
+		*s2 = '\0';
+		s2++;
 		n--;
 	}
 }
