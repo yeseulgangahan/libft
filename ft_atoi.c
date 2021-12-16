@@ -8,9 +8,8 @@ static bool	ft_isspace(char c)
 
 int	ft_atoi(const char *str)
 {
-	int		neg;
-	long	num;
-	size_t	tmp;
+	int			neg;
+	size_t		num;
 
 	while (ft_isspace(*str))
 		str++;
@@ -20,15 +19,13 @@ int	ft_atoi(const char *str)
 	if (*str == '+' || *str == '-')
 		str++;
 	num = 0;
-	tmp = 0;
-	while (*str && '0' <= *str && *str <= '9')
+	while ('0' <= *str && *str <= '9')
 	{
-		tmp = num * 10 + (*str - '0');
-		if (neg == -1 && tmp > (size_t)LONG_MIN)
+		num = num * 10 + (*str - '0');
+		if (neg == -1 && num > -LONG_MIN)
 			return ((int)LONG_MIN);
-		if (neg == 1 && tmp > LONG_MAX)
+		if (neg == 1 && num > LONG_MAX)
 			return ((int)LONG_MAX);
-		num = tmp;
 		str++;
 	}
 	return (neg * (int)num);
