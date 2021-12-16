@@ -1,33 +1,33 @@
 #include "libft.h"
 
-static size_t	ft_cnt(int n)
+static size_t	ft_cntnbr(int n)
 {
-	size_t	pn;
-	size_t	cnt;
+	long long	ln;
+	size_t		cnt;
 
-	pn = n;
+	ln = n;
 	if (n < 0)
-		pn = -pn;
+		ln = -ln;
 	cnt = 1;
-	while (pn / 10)
+	while (ln / 10)
 	{
-		pn = pn / 10;
+		ln = ln / 10;
 		cnt++;
 	}
 	return (cnt);
 }
 
-static void	ft_putnbr(char *s, int n, size_t cnt)
+static void	ft_putrnbr(char *s, int n, size_t cnt)
 {
-	size_t	pn;
+	long long ln;
 
-	pn = n;
+	ln = n;
 	if (n < 0)
-		pn = -pn;
+		ln = -ln;
 	while (cnt)
 	{
-		*(s + cnt - 1) = (pn % 10) + '0';
-		pn = pn / 10;
+		s[cnt - 1] = (ln % 10) + '0';
+		ln = ln / 10;
 		cnt--;
 	}
 }
@@ -41,14 +41,12 @@ char	*ft_itoa(int n)
 	neg = 0;
 	if (n < 0)
 		neg = 1;
-	else
-		neg = 0;
-	cnt = ft_cnt(n);
+	cnt = ft_cntnbr(n);
 	s = (char *)ft_calloc((cnt + neg + 1), sizeof(char));
 	if (s == NULL)
 		return (NULL);
 	if (neg)
 		*s = '-';
-	ft_putnbr((s + neg), n, cnt);
+	ft_putrnbr((s + neg), n, cnt);
 	return (s);
 }
