@@ -1,9 +1,21 @@
-TARGET		:= libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/17 09:17:59 by yehan             #+#    #+#              #
+#    Updated: 2021/12/17 10:08:42 by yehan            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME		:= libft.a
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra Werror
+CFLAGS		:= -Wall -Wextra -Werror
 AR			:= ar
-ARFLAGS		:= rcs
+ARFLAGS		:= -rcs
 RM			:= rm -f
 
 SRCS_MANDATORY	:= \
@@ -15,7 +27,7 @@ SRCS_MANDATORY	:= \
 		ft_isascii.c \
 		ft_isdigit.c \
 		ft_isprint.c \
-		if_itoa.c \
+		ft_itoa.c \
 		ft_memchr.c \
 		ft_memcmp.c \
 		ft_memcpy.c \
@@ -36,28 +48,25 @@ SRCS_MANDATORY	:= \
 		ft_strmapi.c \
 		ft_strncmp.c \
 		ft_strnstr.c \
-		ft_strtchr.c \
+		ft_strrchr.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
 		ft_toupper.c
 
-OBJS		:= $(SRCS:.c=.o)
+OBJS		= $(SRCS_MANDATORY:.c=.o)
 
 .PHONY:		all clean fclean re
 
-all:		$(TARGET)
+all:		$(NAME)
 
 clean:
 			$(RM) $(OBJS)
 
-fclean:
-			$(RM) $(TARGET)
+fclean:		clean
+			$(RM) $(NAME)
 
 re:			fclean all
 
-$(TARGET):	$(OBJS)
-			$(LIBC) $@ $^
-
-%.o:		%.c
-			$(CC) $(CFLAGS) -c -o $@ $<
+$(NAME):	$(OBJS)
+			$(AR) $(ARFLAGS) $@ $^

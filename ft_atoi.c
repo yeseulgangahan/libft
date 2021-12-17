@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 09:18:44 by yehan             #+#    #+#             */
+/*   Updated: 2021/12/17 13:27:07 by yehan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static bool	ft_isspace(char c)
@@ -10,6 +22,7 @@ int	ft_atoi(const char *str)
 {
 	int			neg;
 	size_t		num;
+	long int	cnt;
 
 	while (ft_isspace(*str))
 		str++;
@@ -19,13 +32,15 @@ int	ft_atoi(const char *str)
 	if (*str == '+' || *str == '-')
 		str++;
 	num = 0;
+	cnt = LONG_MAX;
 	while ('0' <= *str && *str <= '9')
 	{
-		num = num * 10 + (*str - '0');
-		if (neg == -1 && num > -LONG_MIN)
+		if ((neg == -1 && !cnt) || (neg == -1 && num > -(size_t)LONG_MIN))
 			return ((int)LONG_MIN);
-		if (neg == 1 && num > LONG_MAX)
+		if ((neg == 1 && !cnt) || (neg == 1 && num > (size_t)LONG_MAX))
 			return ((int)LONG_MAX);
+		num = num * 10 + (*str - '0');
+		cnt = cnt / 10;
 		str++;
 	}
 	return (neg * (int)num);

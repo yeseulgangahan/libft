@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 09:21:25 by yehan             #+#    #+#             */
+/*   Updated: 2021/12/17 09:21:33 by yehan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	ft_cntnbr(int n)
@@ -19,7 +31,7 @@ static size_t	ft_cntnbr(int n)
 
 static void	ft_putrnbr(char *s, int n, size_t cnt)
 {
-	long long ln;
+	long long	ln;
 
 	ln = n;
 	if (n < 0)
