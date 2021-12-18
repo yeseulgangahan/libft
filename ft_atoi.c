@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:18:44 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/17 16:29:14 by yehan            ###   ########.fr       */
+/*   Updated: 2021/12/18 12:10:20 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ int	ft_atoi(const char *str)
 		cnt = cnt / 10;
 		str++;
 	}
-	return (neg * (int)num);
+	return (neg * num);
 }
