@@ -6,7 +6,7 @@
 #    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/17 09:17:59 by yehan             #+#    #+#              #
-#    Updated: 2021/12/17 10:08:42 by yehan            ###   ########.fr        #
+#    Updated: 2021/12/29 16:22:10 by yehan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ AR			:= ar
 ARFLAGS		:= -rcs
 RM			:= rm -f
 
-SRCS_MANDATORY	:= \
+SRCS	:= \
 		ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
@@ -54,19 +54,38 @@ SRCS_MANDATORY	:= \
 		ft_tolower.c \
 		ft_toupper.c
 
-OBJS		= $(SRCS_MANDATORY:.c=.o)
+SRCS_BONUS := \
+	ft_lstadd_back_bonus.c \
+	ft_lstadd_front_bonus.c \
+	ft_lstclear_bonus.c \
+	ft_lstdelone_bonus.c \
+	ft_lstiter_bonus.c \
+	ft_lstlast_bonus.c \
+	ft_lstmap_bonus.c \
+	ft_lstnew_bonus.c \
+	ft_lstsize_bonus.c
 
-.PHONY:		all clean fclean re
+ifeq ($(BONUS),true)
+	SRCS	+=	$(SRCS_BONUS)
+endif
+
+OBJS		= $(SRCS:.c=.o)
+OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
+
+.PHONY:		all clean fclean re bonus
 
 all:		$(NAME)
 
 clean:
-			$(RM) $(OBJS)
+			$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean all
+
+bonus:		all
+			$(MAKE) BONUS=true
 
 $(NAME):	$(OBJS)
 			$(AR) $(ARFLAGS) $@ $^

@@ -6,11 +6,11 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 14:00:46 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/29 14:01:38 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2021/12/29 15:10:34 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_bonus.h"
+#include "libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {

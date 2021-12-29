@@ -6,11 +6,11 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 15:05:54 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/29 15:06:04 by yehan            ###   ########.fr       */
+/*   Updated: 2021/12/29 15:46:58 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_bonus.h"
+#include "libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *))
 {
@@ -18,7 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *))
 	int		size;
 
 	if (lst == NULL || f == NULL || del == NULL)
-		return ;
+		return (NULL);
 	new = ft_lstnew(lst->content);
 	if (new == NULL)
 		return (NULL);
