@@ -1,12 +1,12 @@
 #include "libft_bonus.h"
 
-void	ft_lstiter(t_list *lst, void (*del)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (lst == NULL || del == NULL)
+	if (lst == NULL || f == NULL)
 		return ;
 	while (lst)
 	{
-		del(lst->content);
+		f(lst->content);
 		lst = lst->next;
 	}
 }
