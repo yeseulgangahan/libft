@@ -6,7 +6,7 @@
 #    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/17 09:17:59 by yehan             #+#    #+#              #
-#    Updated: 2021/12/29 16:53:37 by yehan            ###   ########.fr        #
+#    Updated: 2021/12/29 17:07:51 by yehan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ fclean:		clean
 
 re:			fclean all
 
-#bonus:		all
+bonus:		all
 #			$(MAKE) BONUS=true
 
 $(NAME):	$(OBJS) $(OBJS_BONUS)
