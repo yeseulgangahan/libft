@@ -6,7 +6,7 @@
 #    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/17 09:17:59 by yehan             #+#    #+#              #
-#    Updated: 2021/12/29 16:22:10 by yehan            ###   ########.fr        #
+#    Updated: 2021/12/29 16:53:37 by yehan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,9 +65,9 @@ SRCS_BONUS := \
 	ft_lstnew_bonus.c \
 	ft_lstsize_bonus.c
 
-ifeq ($(BONUS),true)
-	SRCS	+=	$(SRCS_BONUS)
-endif
+#ifeq ($(BONUS),true)
+#	SRCS	+=	$(SRCS_BONUS)
+#endif
 
 OBJS		= $(SRCS:.c=.o)
 OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
@@ -84,8 +84,8 @@ fclean:		clean
 
 re:			fclean all
 
-bonus:		all
-			$(MAKE) BONUS=true
+#bonus:		all
+#			$(MAKE) BONUS=true
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(OBJS_BONUS)
 			$(AR) $(ARFLAGS) $@ $^
