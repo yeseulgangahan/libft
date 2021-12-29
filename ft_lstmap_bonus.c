@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 15:05:54 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/29 19:36:01 by yehan            ###   ########.fr       */
+/*   Updated: 2021/12/29 20:13:32 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*lst2;
-	int		size;
+	t_list	*tmp;
 
 	if (lst == NULL || f == NULL || del == NULL)
 		return (NULL);
@@ -24,13 +24,13 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	lst = lst->next;
 	while (lst)
 	{
-		size = ft_lstsize(lst2);
-		ft_lstadd_back(&lst2, ft_lstnew(f(lst->content)));
-		if (size == ft_lstsize(lst2))
+		tmp = ft_lstnew(f(lst->content));
+		if (tmp == NULL)
 		{
 			ft_lstclear(&lst2, del);
 			return (NULL);
 		}
+		ft_lstadd_back(&lst2, tmp);
 		lst = lst->next;
 	}
 	return (lst2);
