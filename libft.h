@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:27:38 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/29 15:50:13 by yehan            ###   ########.fr       */
+/*   Updated: 2021/12/29 16:33:36 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdbool.h>
 # include <limits.h>
 
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -39,7 +39,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*del)(void *));
 t_list	*ft_lstlast(t_list *lst);
-t_list  *ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *));
+t_list	*ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 void	*ft_memchr(const void *s, int c, size_t n);

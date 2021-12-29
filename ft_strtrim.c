@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:27:00 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/17 16:30:33 by yehan            ###   ########.fr       */
+/*   Updated: 2021/12/29 16:31:54 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	if (s1 == NULL)
 		return (ft_substr(s1, 0, 0));
-len = ft_strlen(s1);
+	len = ft_strlen(s1);
 	while (len && *s1 && ft_setchr(set, *s1))
 	{
 		s1++;
