@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:24:20 by yehan             #+#    #+#             */
-/*   Updated: 2021/12/17 16:38:42 by yehan            ###   ########.fr       */
+/*   Updated: 2021/12/29 13:21:57 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**ft_split(char const *s, char c)
 	int			rtnlen;
 
 	s = ft_strtrim(s, &c);
-	if (s == NULL)		
+	if (s == NULL)
 		return (NULL);
 	tmp = s;
 	rtnlen = 0;
