@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/17 09:17:59 by yehan             #+#    #+#              #
-#    Updated: 2021/12/30 18:32:44 by yehan            ###   ########.fr        #
+#    Created: 2021/12/30 18:45:16 by yehan             #+#    #+#              #
+#    Updated: 2021/12/30 18:45:29 by yehan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,6 @@ SRCS_BONUS := \
 	ft_lstmap.c \
 	ft_lstnew.c \
 	ft_lstsize.c
-
 
 OBJS		= $(SRCS:.c=.o)
 OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
