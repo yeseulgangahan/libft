@@ -6,7 +6,7 @@
 #    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/17 09:17:59 by yehan             #+#    #+#              #
-#    Updated: 2021/12/30 16:59:27 by yehan            ###   ########.fr        #
+#    Updated: 2021/12/30 18:32:44 by yehan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ fclean:		clean
 re:			fclean all
 
 bonus:
-			make BONUS=true
+			$(MAKE) BONUS=true
 
 $(NAME):	$(OBJS)
 			$(AR) $(ARFLAGS) $@ $^
