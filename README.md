@@ -33,8 +33,8 @@
     - `const int *pointer1 = &data1;`는 pointer1이 가리키는 값 `data1`을 **적어도** pointer1로 접근했을 때는 바꿀 수 없다는 의미입니다. (예시: `*ponter1 = 10;` (불가능))
     (실제로 `data1`은 `const`로 선언된 변수일 수도, 아닐 수도 있겠지만요.)
     만약 `data1`이 수정가능한 변수라면, 언제든지 새로운 포인터를 선언하여 그 값을 변경할 수 있습니다. (예시: `int *pointer2 = data1;` `*pointer2 = 10;`(가능))
-- `const`의 위치에 따른 의미는 다음과 같습니다.
-  - `const void *p`, 'void const *p`는 동일하게, p가 가리키는 값을 const화 합니다.
+- 포인터 변수에서 `const`의 위치에 따른 의미는 다음과 같습니다.
+  - `const void *p`, `void const *p`는 동일하게, p가 가리키는 값을 const화 합니다.
   - `void * const p`는 p 자체를 const화 합니다.
 - C언어는 함수오버로딩을 지원하지 않아서 함수가 타입안정성을 해할 수밖에 없는 문제를 갖습니다.
   - 일반적으로 함수에서, 입력받은 인자가 const이면 반환도 const로, 입력이 쓰기가능하다면 반환도 쓰기가능하도록 합니다. (타입안정성)
@@ -85,15 +85,7 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
   - `bonus : $(OBJS) $(OBJS_BONUS)` 이런 식으로 타겟파일의 자리에 실행명령어를 쓰면, 비교대상이 없어서 `make bonus`했을 때 계속 리링크되므로 주의해야 합니다.
   - 그럴 때는 `ifdef BONUS` `BONUS=true`와 같이 if문을 활용해봅시다.
 
-## 참조
-- 컴파일과정: https://bradbury.tistory.com/226
-- 라이브러리란: https://bradbury.tistory.com/224?category=1000486
-- 정적변수와 전역변수의 공통점과 차이점: https://m.blog.naver.com/xlql555/221850860864
-- const의 타입안정성 문제: https://en.wikipedia.org/wiki/Const_(computer_programming)#strchr_problem
-- kilee의 Makefile교재: https://www.notion.so/Makefile-5515ac58527c481cb67f00d30a19a7f9
-- Makefile의 매크로 기본이해: http://doc.kldp.org/KoreanDoc/html/GNU-Make/GNU-Make-3.html
-
-# 함수 구현
+# Part 1 (c 라이브러리 함수)
 ## 문자를 다루는 함수
 - `isalpha` `isprint` `isalnum` `isdigit` `isascii` `toupper` `tolower`
 - 대부분 `ctype.h`에 있습니다.
@@ -110,9 +102,80 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
 - 모든 함수에서 **문자**란 unsigned char라고 해석하면 됩니다.
 ### 복사하는 함수
 - `memcpy` `memmove` `strlcpy`
-- 인자 2개가 모두 NULLpointer일 때만 바로 `return (dst);`하고, 인자가 1개라도 제대로 들어오면 동작을 수행합니다. 
-  인자로 NULLpointer가 들어오는 경우를 고려하지 않되, 인자 2개가 모두 NULLpointer면 비교결과가 참이라고 보는 셈 입니다.
+- 이들 함수는 인자 2개가 모두 NULLpointer일 때만 바로 `return (dst);`하고, 인자가 1개라도 제대로 들어오면 동작을 수행하지요. 
+  인자로 NULLpointer가 들어오는 경우를 고려하지 않되, 인자 2개가 모두 NULLpointer면 비교결과가 참이라고 보는 셈입니다.
 ### 연결하는 함수
 - `strlcat`
+  - strlcat은 사용자가 적어도 1) dst의 길이는 알고 있을 것이며 2) NUL-terminating string이 들어올 거라고 전제합니다.
+  - dst의 유효성에 따라 분기합니다.
+    - size -1 에서 NUL이 없을 경우 dst는 유효하지 않습니다. dst는 변경되지 않습니다. dst의 길이는 적어도 size만큼은 될 것이므로 (그 너머까지 있을 경우는 차마 고려하지 않고) dst의 길이를 size로 간주합니다.
+    - size - 1 에서 src를 복사해넣을 공간이 있을 경우 dst는 유효합니다. dst는 변경되며 strlcat에 의해 NUL-terminated됩니다.
+  - strlcat의 리턴값은 내가 생성하고 싶었던 문자열의 길이를 알려줍니다. 그것은 연결 실패 시 완벽한 연결에 필요한 버퍼사이즈를 의미하기도 하겠지요. 우리는 `return value < sizeof(buf)`면 연결 성공, `return value >= sizeof(buf)`면 buf가 부족하여 뭔가가 잘렸다는 걸 알 수 있습니다.
 
-`` `` `` `` `` `` `` ``
+### 비교하는 함수
+- `memcmp` `strncmp`
+- 이식성을 위해서는 리턴값의 부호만 활용해야 합니다.
+- 컴파일러마다 char의 디폴트가 unsigned char이기도 signed char이기도 하므로, 연산을 수행할 때는 unsigned char로 형변환을 해주어서 더 큰 문자도 비교할 수 있도록 해야 합니다.
+### 탐색하는 함수
+- `memchr` `strchr` `strrchr` `strnchr`
+- 옛날에는 함수 프로토타입에 인자가 명시되지 않았고 인자들을 int로 자동승격하여 사용했기 때문에, 이후에 C언어가 프로토타입을 만들면서 인자의 자료형을 옛날 라이브러리와 맞추는 게 중요했습니다. 때문에 memchr, strchr 또한 찾을 문자를 int로 받는 겁니다.
+### 기타 함수
+- `memset` `bzero` `strlen`
+
+## 메모리를 다루는 함수
+- `calloc` `atoi`
+- `stdlib.h`에 있습니다.
+- 저장의 순서나 연속성은 unspecified입니다.
+- malloc(0) 일 때의 동작은 구현에 따릅니다. NULL포인터를 반환하거나, size가 0이 아닌 것처럼 반환합니다. (객체 접근에 사용할 수는 없는 free될 수 있는 포인터)
+- 할당 실패 시 NULLpointer를 반환하고, 성공 시 반환된 포인터는 정렬된 다음, 포인터(유형은 상관 없음)에 할당되어서 접근하는 데에 사용됩니다.
+- 수명은 할당 시부터 명시적 할당 해제 시까지 입니다.
+- `atoi`은 `(int)strtol(str, (char **)NULL, 10)`과 같습니다. `strtol`은 문자열을 long으로 바꿔주는 함수로 오버플로, 언더플로가 발생했을 때 리턴값은 LONG_MIN, LONG_MAX로 고정됩니다. 이에 따라 `atoi`은 1) int범위 이내일 때, 2) int범위를 넘기고 long범위 이내일 때, 3) long범위 넘어갈 때 각각 다르게 리턴합니다.
+
+# Part 2. (새로 만드는 함수)
+## 파일디스크립터를 인자로 받는 함수
+- 파일디스크립터란 시스템이 파일에 붙이는 별명으로 생각해볼 수 있습니다. 음수가 아닌 정수이며, 0(표준입력), 1(표준출력), 2(표준에러)는 기본으로 배정된 파일디스크립터입니다.
+- `open` 함수로 파일을 열면 파일디스크립터 값이 리턴됩니다. (예시: `open("a.txt", WR_ONLY);`)
+- `write` 함수를 사용하면 해당 파일로 버퍼가 입력됩니다.
+## 함수를 인자로 받는 함수
+- `strmapi` `striteri`
+- 각각 i(인덱스)를 순회하며 mapping(다른 값으로 대응), iteration(반복(하여 적용))한다는 의미입니다.
+- `strmapi`에 들어가는 함수의 예시는 다음과 같습니다. https://www.notion.so/libft-Defence-d990cff1b8e7474985ffe28e01e5078c#754790c9ec6c4026b87e1fc9c742696b
+  - 첫번째 인자로 static int배열에 이미 작업한 인덱스를 표시해서 오류를 사전에 체크합니다.
+  - 두번째 인자 값을 바꿔서 리턴합니다.
+## 기타 함수
+- `split` `strtrim` `substr` `itoa` `strjoin`
+
+# Bonus Part.
+## 연결리스트를 다루는 함수
+- `lstnew` `lstadd_front` `lstadd_back` `lstlast` `lstdelone` `lstclear` `lstmap` `lstiter`
+- `lstdelone`에서 del함수를 넘겨주는 이유는, 만약 리스트의 content가 구조체를 가리킬 경우 구조체의 멤버들을 모두 프리시켜줄 수 있는 함수가 필요하기 때문입니다.
+  - 예)
+```
+void    ft_delcontent(void *content) {
+  free(content->member1);
+  free(content->member2);
+  free(content);}
+```
+- `lstmap`에 넘기는 f함수 예시 (문자가 o일 때 a로 바꿔줌)
+```
+void    *ft_map(void *c) {
+	int   i;
+	char  *pouet;
+
+	i = -1;
+	pouet = (char *)c;
+	while (pouet[++i])
+		if (pouet[i] == 'o')
+			pouet[i] = 'a';
+	return (c);}
+ ```
+## 참조
+- 컴파일과정: https://bradbury.tistory.com/226
+- 라이브러리란: https://bradbury.tistory.com/224?category=1000486
+- 정적변수와 전역변수의 공통점과 차이점: https://m.blog.naver.com/xlql555/221850860864
+- const의 타입안정성 문제: https://en.wikipedia.org/wiki/Const_(computer_programming)#strchr_problem
+- kilee의 Makefile교재: https://www.notion.so/Makefile-5515ac58527c481cb67f00d30a19a7f9
+- Makefile의 매크로 기본이해: http://doc.kldp.org/KoreanDoc/html/GNU-Make/GNU-Make-3.html
+- strlcat 동작방식: https://stackoverflow.com/questions/33154740/strlcat-is-dst-always-nul-terminated-what-are-size-and-the-returned-value
+- strlcat의 리턴값을 활용하는 법: https://www.delorie.com/djgpp/doc/libc/libc_762.html
+- 파일 디스크립터 설명: https://blog.naver.com/songblue61/221289713360
