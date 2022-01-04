@@ -1,4 +1,4 @@
-# 공부한 방법
+## 공부한 방법
 1. 프로젝트문서를 훑어보고 모르는 개념을 공부한다.\
   a. google검색을 기본으로 한다.\
   b. Makefile에 대한 1일 동료학습세션을 진행해보았다.
@@ -16,7 +16,7 @@
   a. 42서울 슬랙에 남아있는 질답쓰레드와 42서울 교육생의 과제 관련 블로그글에 지나치게 의지하는 것을 지양\
   b. 다른 교육생이 만든 테스터로 정오를 미리 확인할 뿐 함수의 실제 활용은 이해하지 못하고 제출하는 것을 지양
 
-# 이번 프로젝트를 위해 새로 공부한 개념
+## 이번 프로젝트를 위해 새로 공부한 개념
 
 ### `static`키워드
 - **정적변수static variable**는 전역변수의 일부 특징을 갖습니다.
@@ -106,17 +106,17 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
   - `bonus : $(OBJS) $(OBJS_BONUS)` 이런 식으로 타겟파일의 자리에 실행명령어를 쓰면, 비교대상이 없어서 `make bonus`했을 때 계속 리링크되므로 주의해야 합니다.
   - 그럴 때는 `ifdef BONUS` `BONUS=true`와 같이 if문을 활용해봅시다.
 
-# Part 1
+## Part 1
 C 라이브러리 함수를 구현한다.
 
-## 문자를 다루는 함수
+### 문자를 다루는 함수
 `isalpha` `isprint` `isalnum` `isdigit` `isascii` `toupper` `tolower`
 - 대부분 `ctype.h`에 있습니다.
 - c 값이 적합할 때, non-zero를 반환합니다.
 - 인자는 int이고, 값은 unsigned char 또는 EOF의 값으로 표현할 수 있어야 합니다. 그 밖의 값이 들어오는 것은 undefined behavior입니다.
 - `isalpha`의 경우, 로케일별로 결과가 달라집니다. POSIX 시스템의 디폴트 로케일인  "C" 로케일을 기준으로 구현했습니다.
 
-## 문자열을 다루는 함수
+### 문자열을 다루는 함수
 - 모두 `string.h`에 있습니다.
 - `string.h`에는 문자타입의 배열 혹은 문자타입의 배열로 여겨지는 값을 다루기에 편리하도록, `size_t`라는 타입과 `NULL`이라는 매크로가 정의되어 있습니다.
   - `size_t`는 이론상 가장 큰 사이즈를 담을 수 있는 unsigned 데이터 타입입니다. 모든 배열의 인덱스를 보유하도록 보장하지요.
@@ -144,7 +144,7 @@ C 라이브러리 함수를 구현한다.
 ### 기타 함수
 `memset` `bzero` `strlen`
 
-## 메모리를 다루는 함수
+### 메모리를 다루는 함수
 `calloc` `atoi`
 - `stdlib.h`에 있습니다.
 - 저장의 순서나 연속성은 unspecified입니다.
@@ -153,15 +153,15 @@ C 라이브러리 함수를 구현한다.
 - 수명은 할당 시부터 명시적 할당 해제 시까지 입니다.
 - `atoi`은 `(int)strtol(str, (char **)NULL, 10)`과 같습니다. `strtol`은 문자열을 long으로 바꿔주는 함수로 오버플로, 언더플로가 발생했을 때 리턴값은 LONG_MIN, LONG_MAX로 고정됩니다. 이에 따라 `atoi`은 1) int범위 이내일 때, 2) int범위를 넘기고 long범위 이내일 때, 3) long범위 넘어갈 때 각각 다르게 리턴합니다.
 
-# Part 2.
+## Part 2.
 특정 기능을 수행하는 새로운 함수를 만든다.
 
-## 파일디스크립터를 인자로 받는 함수
+### 파일디스크립터를 인자로 받는 함수
 `putchar_fd` `putendl_fd` `putnbr_fd` `putstr_fd`
 - 파일디스크립터란 시스템이 파일에 붙이는 별명으로 생각해볼 수 있습니다. 음수가 아닌 정수이며, 0(표준입력), 1(표준출력), 2(표준에러)는 기본으로 배정된 파일디스크립터입니다.
 - `open` 함수로 파일을 열면 파일디스크립터 값이 리턴됩니다. (예시: `open("a.txt", WR_ONLY);`)
 - `write` 함수를 사용하면 해당 파일로 버퍼가 입력됩니다.
-## 함수를 인자로 받는 함수
+### 함수를 인자로 받는 함수
 `strmapi` `striteri`
 - 각각 i(인덱스)를 순회하며 mapping(다른 값으로 대응), iteration(반복(하여 적용))한다는 의미입니다.
 - `strmapi`에 들어가는 함수의 예시는 다음과 같습니다. (출처: libft-war-machine)
@@ -186,13 +186,13 @@ char	mapi(unsigned int i, char c)
 /* 소문자는 대문자로, 대문자는 소문자로 바꿔준다 */
 ```
 
-## 기타 함수
+### 기타 함수
 `split` `strtrim` `substr` `itoa` `strjoin`
 
-# Bonus Part.
+## Bonus Part.
 연결리스트를 쉽게 다룰 수 있는 함수들을 만든다.
 
-## 연결리스트를 다루는 함수
+### 연결리스트를 다루는 함수
 `lstnew` `lstadd_front` `lstadd_back` `lstlast` `lstdelone` `lstclear` `lstmap` `lstiter`
 - `lstdelone`에서 바로 free(lst->content)하는 대신 del함수를 넘겨주는 이유는, 만약 리스트의 content가 구조체를 가리킬 경우 구조체의 멤버들을 모두 프리시켜줄 수 있는 함수가 필요하기 때문입니다. 다음은 그 예시입니다.
 ```
