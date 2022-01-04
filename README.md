@@ -86,7 +86,7 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
   - 그럴 때는 `ifdef BONUS` `BONUS=true`와 같이 if문을 활용해봅시다.
 
 # Part 1
-c 라이브러리 함수들을 똑같이 재구현한다.
+C 라이브러리 함수를 재구현한다.
 
 ## 문자를 다루는 함수
 - `isalpha` `isprint` `isalnum` `isdigit` `isascii` `toupper` `tolower`
@@ -134,9 +134,10 @@ c 라이브러리 함수들을 똑같이 재구현한다.
 - `atoi`은 `(int)strtol(str, (char **)NULL, 10)`과 같습니다. `strtol`은 문자열을 long으로 바꿔주는 함수로 오버플로, 언더플로가 발생했을 때 리턴값은 LONG_MIN, LONG_MAX로 고정됩니다. 이에 따라 `atoi`은 1) int범위 이내일 때, 2) int범위를 넘기고 long범위 이내일 때, 3) long범위 넘어갈 때 각각 다르게 리턴합니다.
 
 # Part 2.
-과제에서 제시한 기능을 수행하는 새로운 함수를 만든다.
+특정 기능을 수행하는 새로운 함수를 만든다.
 
 ## 파일디스크립터를 인자로 받는 함수
+- `putchar_fd` `putendl_fd` `putnbr_fd` `putstr_fd`
 - 파일디스크립터란 시스템이 파일에 붙이는 별명으로 생각해볼 수 있습니다. 음수가 아닌 정수이며, 0(표준입력), 1(표준출력), 2(표준에러)는 기본으로 배정된 파일디스크립터입니다.
 - `open` 함수로 파일을 열면 파일디스크립터 값이 리턴됩니다. (예시: `open("a.txt", WR_ONLY);`)
 - `write` 함수를 사용하면 해당 파일로 버퍼가 입력됩니다.
