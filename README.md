@@ -1,6 +1,7 @@
 # 공부한 방법
 1. 프로젝트문서를 훑어보고 모르는 개념을 공부한다.\
-  a. google검색을 기본으로 한다.
+  a. google검색을 기본으로 한다.\
+  b. Makefile에 대한 1일 동료학습세션을 진행해보았다.
 2. 각 함수를 구현한다. 그 과정에서 다음의 출처를 이용한다.\
   a. **man page** : 함수의 기본 동작, return value를 파악한다.\
   b. **C명세**: 각 헤더에 대한 챕터를 통해 함수가 만들어진 의도를 파악한다.\
@@ -12,8 +13,8 @@
   c. 만든 함수를 실제로 어떻게 사용할 수 있는지, 왜 그러한 기능을 갖는지까지 설명할 수 있도록 한다.
 4. 공부한 내용을 글로 정리한다.
 5. 경계한 것\
-  a. 42서울 슬랙에 남아있는 질답쓰레드와 42서울 교육생의 과제 관련 블로그글의 도움을 받는 것을 지양.\
-  b. 다른 교육생이 만든 테스터로 정오를 미리 확인할 뿐 함수의 실제 활용은 이해하지 못하고 제출하는 것을 지양.
+  a. 42서울 슬랙에 남아있는 질답쓰레드와 42서울 교육생의 과제 관련 블로그글에 지나치게 의지하는 것을 지양\
+  b. 다른 교육생이 만든 테스터로 정오를 미리 확인할 뿐 함수의 실제 활용은 이해하지 못하고 제출하는 것을 지양
 
 # 이번 프로젝트를 위해 새로 공부한 개념
 
@@ -106,10 +107,10 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
   - 그럴 때는 `ifdef BONUS` `BONUS=true`와 같이 if문을 활용해봅시다.
 
 # Part 1
-C 라이브러리 함수를 재구현한다.
+C 라이브러리 함수를 구현한다.
 
 ## 문자를 다루는 함수
-- `isalpha` `isprint` `isalnum` `isdigit` `isascii` `toupper` `tolower`
+`isalpha` `isprint` `isalnum` `isdigit` `isascii` `toupper` `tolower`
 - 대부분 `ctype.h`에 있습니다.
 - c 값이 적합할 때, non-zero를 반환합니다.
 - 인자는 int이고, 값은 unsigned char 또는 EOF의 값으로 표현할 수 있어야 합니다. 그 밖의 값이 들어오는 것은 undefined behavior입니다.
@@ -122,11 +123,11 @@ C 라이브러리 함수를 재구현한다.
 - 모든 경우에서, char*와 void*는 배열의 첫(제일 작은 주소) 문자를 가리킵니다. 객체의 끝을 넘어 배열에 접근하는 행동은 undefined behavior입니다.
 - 모든 함수에서 **문자**란 unsigned char라고 해석하면 됩니다.
 ### 복사하는 함수
-- `memcpy` `memmove` `strlcpy`
+`memcpy` `memmove` `strlcpy`
 - 이들 함수는 인자 2개가 모두 NULLpointer일 때만 바로 `return (dst);`하고, 인자가 1개라도 제대로 들어오면 동작을 수행하지요. 
   인자로 NULLpointer가 들어오는 경우를 고려하지 않되, 인자 2개가 모두 NULLpointer면 비교결과가 참이라고 보는 셈입니다.
 ### 연결하는 함수
-- `strlcat`
+`strlcat`
   - strlcat은 사용자가 적어도 1) dst의 길이는 알고 있을 것이며 2) NUL-terminating string이 들어올 거라고 전제합니다.
   - dst의 유효성에 따라 분기합니다.
     - size -1 에서 NUL이 없을 경우 dst는 유효하지 않습니다. dst는 변경되지 않습니다. dst의 길이는 적어도 size만큼은 될 것이므로 (그 너머까지 있을 경우는 차마 고려하지 않고) dst의 길이를 size로 간주합니다.
@@ -134,17 +135,17 @@ C 라이브러리 함수를 재구현한다.
   - strlcat의 리턴값은 내가 생성하고 싶었던 문자열의 길이를 알려줍니다. 그것은 연결 실패 시 완벽한 연결에 필요한 버퍼사이즈를 의미하기도 하겠지요. 우리는 `return value < sizeof(buf)`면 연결 성공, `return value >= sizeof(buf)`면 buf가 부족하여 뭔가가 잘렸다는 걸 알 수 있습니다.
 
 ### 비교하는 함수
-- `memcmp` `strncmp`
+`memcmp` `strncmp`
 - 이식성을 위해서는 리턴값의 부호만 활용해야 합니다.
 - 컴파일러마다 char의 디폴트가 unsigned char이기도 signed char이기도 하므로, 연산을 수행할 때는 unsigned char로 형변환을 해주어서 더 큰 문자도 비교할 수 있도록 해야 합니다.
 ### 탐색하는 함수
-- `memchr` `strchr` `strrchr` `strnchr`
+`memchr` `strchr` `strrchr` `strnchr`
 - 옛날에는 함수 프로토타입에 인자가 명시되지 않았고 인자들을 int로 자동승격하여 사용했기 때문에, 이후에 C언어가 프로토타입을 만들면서 인자의 자료형을 옛날 라이브러리와 맞추는 게 중요했습니다. 때문에 memchr, strchr 또한 찾을 문자를 int로 받는 겁니다.
 ### 기타 함수
-- `memset` `bzero` `strlen`
+`memset` `bzero` `strlen`
 
 ## 메모리를 다루는 함수
-- `calloc` `atoi`
+`calloc` `atoi`
 - `stdlib.h`에 있습니다.
 - 저장의 순서나 연속성은 unspecified입니다.
 - malloc(0) 일 때의 동작은 구현에 따릅니다. NULL포인터를 반환하거나, size가 0이 아닌 것처럼 반환합니다. (객체 접근에 사용할 수는 없는 free될 수 있는 포인터)
@@ -156,12 +157,12 @@ C 라이브러리 함수를 재구현한다.
 특정 기능을 수행하는 새로운 함수를 만든다.
 
 ## 파일디스크립터를 인자로 받는 함수
-- `putchar_fd` `putendl_fd` `putnbr_fd` `putstr_fd`
+`putchar_fd` `putendl_fd` `putnbr_fd` `putstr_fd`
 - 파일디스크립터란 시스템이 파일에 붙이는 별명으로 생각해볼 수 있습니다. 음수가 아닌 정수이며, 0(표준입력), 1(표준출력), 2(표준에러)는 기본으로 배정된 파일디스크립터입니다.
 - `open` 함수로 파일을 열면 파일디스크립터 값이 리턴됩니다. (예시: `open("a.txt", WR_ONLY);`)
 - `write` 함수를 사용하면 해당 파일로 버퍼가 입력됩니다.
 ## 함수를 인자로 받는 함수
-- `strmapi` `striteri`
+`strmapi` `striteri`
 - 각각 i(인덱스)를 순회하며 mapping(다른 값으로 대응), iteration(반복(하여 적용))한다는 의미입니다.
 - `strmapi`에 들어가는 함수의 예시는 다음과 같습니다. (출처: libft-war-machine)
   - 첫번째 인자로 static int배열에 이미 작업한 인덱스를 표시해서 오류를 사전에 체크합니다.
@@ -186,13 +187,13 @@ char	mapi(unsigned int i, char c)
 ```
 
 ## 기타 함수
-- `split` `strtrim` `substr` `itoa` `strjoin`
+`split` `strtrim` `substr` `itoa` `strjoin`
 
 # Bonus Part.
 연결리스트를 쉽게 다룰 수 있는 함수들을 만든다.
 
 ## 연결리스트를 다루는 함수
-- `lstnew` `lstadd_front` `lstadd_back` `lstlast` `lstdelone` `lstclear` `lstmap` `lstiter`
+`lstnew` `lstadd_front` `lstadd_back` `lstlast` `lstdelone` `lstclear` `lstmap` `lstiter`
 - `lstdelone`에서 바로 free(lst->content)하는 대신 del함수를 넘겨주는 이유는, 만약 리스트의 content가 구조체를 가리킬 경우 구조체의 멤버들을 모두 프리시켜줄 수 있는 함수가 필요하기 때문입니다. 다음은 그 예시입니다.
 ```
 void    ft_delcontent(void *content) {
