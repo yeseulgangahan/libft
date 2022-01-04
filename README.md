@@ -122,11 +122,11 @@ C 라이브러리 함수를 구현한다.
   - `size_t`는 이론상 가장 큰 사이즈를 담을 수 있는 unsigned 데이터 타입입니다. 모든 배열의 인덱스를 보유하도록 보장하지요.
 - 모든 경우에서, char*와 void*는 배열의 첫(제일 작은 주소) 문자를 가리킵니다. 객체의 끝을 넘어 배열에 접근하는 행동은 undefined behavior입니다.
 - 모든 함수에서 **문자**란 unsigned char라고 해석하면 됩니다.
-### 복사하는 함수
+#### 복사하는 함수
 `memcpy` `memmove` `strlcpy`
 - 이들 함수는 인자 2개가 모두 NULLpointer일 때만 바로 `return (dst);`하고, 인자가 1개라도 제대로 들어오면 동작을 수행하지요. 
   인자로 NULLpointer가 들어오는 경우를 고려하지 않되, 인자 2개가 모두 NULLpointer면 비교결과가 참이라고 보는 셈입니다.
-### 연결하는 함수
+#### 연결하는 함수
 `strlcat`
   - strlcat은 사용자가 적어도 1) dst의 길이는 알고 있을 것이며 2) NUL-terminating string이 들어올 거라고 전제합니다.
   - dst의 유효성에 따라 분기합니다.
@@ -134,14 +134,14 @@ C 라이브러리 함수를 구현한다.
     - size - 1 에서 src를 복사해넣을 공간이 있을 경우 dst는 유효합니다. dst는 변경되며 strlcat에 의해 NUL-terminated됩니다.
   - strlcat의 리턴값은 내가 생성하고 싶었던 문자열의 길이를 알려줍니다. 그것은 연결 실패 시 완벽한 연결에 필요한 버퍼사이즈를 의미하기도 하겠지요. 우리는 `return value < sizeof(buf)`면 연결 성공, `return value >= sizeof(buf)`면 buf가 부족하여 뭔가가 잘렸다는 걸 알 수 있습니다.
 
-### 비교하는 함수
+#### 비교하는 함수
 `memcmp` `strncmp`
 - 이식성을 위해서는 리턴값의 부호만 활용해야 합니다.
 - 컴파일러마다 char의 디폴트가 unsigned char이기도 signed char이기도 하므로, 연산을 수행할 때는 unsigned char로 형변환을 해주어서 더 큰 문자도 비교할 수 있도록 해야 합니다.
-### 탐색하는 함수
+#### 탐색하는 함수
 `memchr` `strchr` `strrchr` `strnchr`
 - 옛날에는 함수 프로토타입에 인자가 명시되지 않았고 인자들을 int로 자동승격하여 사용했기 때문에, 이후에 C언어가 프로토타입을 만들면서 인자의 자료형을 옛날 라이브러리와 맞추는 게 중요했습니다. 때문에 memchr, strchr 또한 찾을 문자를 int로 받는 겁니다.
-### 기타 함수
+#### 기타 함수
 `memset` `bzero` `strlen`
 
 ### 메모리를 다루는 함수
