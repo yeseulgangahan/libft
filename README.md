@@ -139,24 +139,42 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
 ## 함수를 인자로 받는 함수
 - `strmapi` `striteri`
 - 각각 i(인덱스)를 순회하며 mapping(다른 값으로 대응), iteration(반복(하여 적용))한다는 의미입니다.
-- `strmapi`에 들어가는 함수의 예시는 다음과 같습니다. https://www.notion.so/libft-Defence-d990cff1b8e7474985ffe28e01e5078c#754790c9ec6c4026b87e1fc9c742696b
+- `strmapi`에 들어가는 함수의 예시는 다음과 같습니다. (출처: libft-war-machine)
   - 첫번째 인자로 static int배열에 이미 작업한 인덱스를 표시해서 오류를 사전에 체크합니다.
   - 두번째 인자 값을 바꿔서 리턴합니다.
+```
+char	mapi(unsigned int i, char c)
+{
+	static int indexArray[11] = {0};
+
+	if (i > 10 || indexArray[i] == 1)
+		write(1, "wrong index\n", 12);
+	else
+		indexArray[i] = 1;
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	else
+		return (c);
+}
+/* 소문자는 대문자로, 대문자는 소문자로 바꿔준다 */
+```
+
 ## 기타 함수
 - `split` `strtrim` `substr` `itoa` `strjoin`
 
 # Bonus Part.
 ## 연결리스트를 다루는 함수
 - `lstnew` `lstadd_front` `lstadd_back` `lstlast` `lstdelone` `lstclear` `lstmap` `lstiter`
-- `lstdelone`에서 바로 free(lst->content)하는 대신 del함수를 넘겨주는 이유는, 만약 리스트의 content가 구조체를 가리킬 경우 구조체의 멤버들을 모두 프리시켜줄 수 있는 함수가 필요하기 때문입니다.
-  - 예)
+- `lstdelone`에서 바로 free(lst->content)하는 대신 del함수를 넘겨주는 이유는, 만약 리스트의 content가 구조체를 가리킬 경우 구조체의 멤버들을 모두 프리시켜줄 수 있는 함수가 필요하기 때문입니다. 다음은 그 예시입니다.
 ```
 void    ft_delcontent(void *content) {
   free(content->member1);
   free(content->member2);
   free(content);}
 ```
-- `lstmap`에 넘기는 f함수 예시 (문자가 o일 때 a로 바꿔주는 함수)
+- `lstmap`에 넘기는 f함수의 예시는 다음과 같습니다. (출처: libft-war-machine)
 ```
 void    *ft_map(void *c) {
 	int   i;
@@ -167,7 +185,9 @@ void    *ft_map(void *c) {
 	while (pouet[++i])
 		if (pouet[i] == 'o')
 			pouet[i] = 'a';
-	return (c);}
+	return (c);
+}
+/* 문자가 o일 때 a로 바꿔준다 */
  ```
 ## 참조
 - 컴파일과정: https://bradbury.tistory.com/226
@@ -179,3 +199,4 @@ void    *ft_map(void *c) {
 - strlcat 동작방식: https://stackoverflow.com/questions/33154740/strlcat-is-dst-always-nul-terminated-what-are-size-and-the-returned-value
 - strlcat의 리턴값을 활용하는 법: https://www.delorie.com/djgpp/doc/libc/libc_762.html
 - 파일 디스크립터 설명: https://blog.naver.com/songblue61/221289713360
+- 인자로 넘어가는 함수 예시 출처: https://github.com/y3ll0w42/libft-war-machine
