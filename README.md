@@ -106,6 +106,42 @@ char 또한 "시스템의 default character set을 저장할 수 있어야" 한�
   - `bonus : $(OBJS) $(OBJS_BONUS)` 이런 식으로 타겟파일의 자리에 실행명령어를 쓰면, 비교대상이 없어서 `make bonus`했을 때 계속 리링크되므로 주의해야 합니다.
   - 그럴 때는 `ifdef BONUS` `BONUS=true`와 같이 if문을 활용해봅시다.
 
+### 함수포인터
+- 함수 포인터는 다음과 같이 선언, 초기화하고 사용합니다.
+```
+int main(void){
+	void (*func_ptr)(int) = &func;
+        (*func_ptr)(10);
+}
+```
+  - 함수의 이름은 함수의 주소를 얻는 데에 사용될 수 있으므로, 다음도 가능합니다.
+```
+int main(void){
+	void (*func_ptr)(int) = func;
+	func_ptr(10);
+}
+```
+- 일반적인 포인터와 다르게,
+  - data가 아닌 **실행가능한 code의 처음**을 가리킵니다.
+  - 포인터를 이용해서 메모리를 할당, 해제하지 않습니다.
+- 일반적인 포인터처럼,
+  - 포인터 배열을 만들 수 있습니다.
+```
+void (*fun_ptr_arr[])(int, int) = {add, subtract, multiply};
+/* add, subtract, multiply은 각각 함수의 이름 */
+```
+  - 이런 배열을 이용하면 조건문을 대체할 수도 있습니다.
+```
+int main(void) {
+	unsigned int ch;
+      	int a = 15, b = 10;
+       	scanf("%d", &ch);
+        (*fun_ptr_arr[ch])(a, b);
+ }
+/* 동작시키고 싶은 함수가 무엇인지에 따라 배열인덱스 0, 1, 2 입력 */
+```
+- 함수포인터를 함수의 인자로 넘기고, 리턴할 수 있습니다.
+
 ## Part 1
 C 라이브러리 함수를 구현한다.
 
@@ -223,6 +259,7 @@ void    *ft_map(void *c) {
 - const의 타입안정성 문제: https://en.wikipedia.org/wiki/Const_(computer_programming)#strchr_problem
 - kilee의 Makefile교재: https://www.notion.so/Makefile-5515ac58527c481cb67f00d30a19a7f9
 - Makefile의 매크로 기본이해: http://doc.kldp.org/KoreanDoc/html/GNU-Make/GNU-Make-3.html
+- 함수포인터: https://www.geeksforgeeks.org/function-pointer-in-c
 - strlcat 동작방식: https://stackoverflow.com/questions/33154740/strlcat-is-dst-always-nul-terminated-what-are-size-and-the-returned-value
 - strlcat의 리턴값을 활용하는 법: https://www.delorie.com/djgpp/doc/libc/libc_762.html
 - 파일 디스크립터 설명: https://blog.naver.com/songblue61/221289713360
