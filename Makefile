@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: yehan <yehan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/30 18:45:16 by yehan             #+#    #+#              #
-#    Updated: 2021/12/30 18:45:29 by yehan            ###   ########.fr        #
+#    Updated: 2022/05/03 20:19:48 by yehan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ CFLAGS		:= -Wall -Wextra -Werror
 AR			:= ar
 ARFLAGS		:= -rcs
 RM			:= rm -f
+
+# 과제에서 만든 함수는 SRCS에,
+# 내가 만든 함수는 SRCS_YEHAN에 있다.
 
 SRCS	:= \
 		ft_atoi.c \
@@ -52,40 +55,48 @@ SRCS	:= \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c
+		ft_toupper.c \
+		ft_lstadd_back.c \
+		ft_lstadd_front.c \
+		ft_lstclear.c \
+		ft_lstdelone.c \
+		ft_lstiter.c \
+		ft_lstlast.c \
+		ft_lstmap.c \
+		ft_lstnew.c \
+		ft_lstsize.c \
+		get_next_line.c \
+		get_next_line_utils.c \
+		get_next_line_bonus.c \
+		get_next_line_utils_bonus.c \
 
-SRCS_BONUS := \
-	ft_lstadd_back.c \
-	ft_lstadd_front.c \
-	ft_lstclear.c \
-	ft_lstdelone.c \
-	ft_lstiter.c \
-	ft_lstlast.c \
-	ft_lstmap.c \
-	ft_lstnew.c \
-	ft_lstsize.c
+SRCS_YEHAN := \
+		ft_lstadd_back_int.c \
+		ft_lstlast_int.c \
+		ft_lstnew_int.c
+
 
 OBJS		= $(SRCS:.c=.o)
-OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
+OBJS_YEHAN	= $(SRCS_YEHAN:.c=.o)
 
-ifdef BONUS
-	OBJS	+=	$(OBJS_BONUS)
+ifdef YEHAN
+	OBJS	+=	$(OBJS_YEHAN)
 endif
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re yehan
 
 all:		$(NAME)
 
 clean:
-			$(RM) $(OBJS) $(OBJS_BONUS)
+			$(RM) $(OBJS) $(OBJS_YEHAN)
 
 fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean all
 
-bonus:
-			$(MAKE) BONUS=true
+yehan:
+			$(MAKE) YEHAN=true
 
 $(NAME):	$(OBJS)
 			$(AR) $(ARFLAGS) $@ $^

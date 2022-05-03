@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yehan <yehan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/29 14:01:28 by yehan             #+#    #+#             */
-/*   Updated: 2022/05/03 12:05:05 by yehan            ###   ########.fr       */
+/*   Created: 2022/05/03 12:04:25 by yehan             #+#    #+#             */
+/*   Updated: 2022/05/03 12:13:02 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_list_int	*ft_lstnew_int(int content)
 {
-	t_list	*new;
+	t_list_int	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_list_int));
 	if (new == NULL)
 		return (NULL);
 	new->content = content;
