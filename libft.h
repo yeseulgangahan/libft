@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:27:38 by yehan             #+#    #+#             */
-/*   Updated: 2022/05/04 10:40:55 by yehan            ###   ########.fr       */
+/*   Updated: 2022/05/03 20:17:03 by yehan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,38 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+
+/* get_next_line */
+# define BUFFER_SIZE 1000
+
+char	*get_next_line(int fd);
+char	*read_iter(char **s_save, int fd);
+char	*get_line(char const *s_save);
+char	*set_remains(char **s_save, size_t offset);
+char	*append_buf(char const *s_save, char const *buf);
+size_t	ft_strlen(char const *s);
+char	*ft_strchr(char const *s, int c);
+size_t	ft_strlcpy(char *dst, char const *src, size_t dstsize);
+
+/* get_next_line_bonus */
+typedef struct s_list_gnl
+{
+	int					fd;
+	char				*save;
+	struct s_list_gnl	*prev;
+	struct s_list_gnl	*next;
+}	t_list_gnl;
+
+char		*get_next_line_bonus(int fd);
+t_list_gnl	*get_node(t_list_gnl *head, int fd);
+char		*read_iter(char **save, int fd);
+char		*get_line(char const *save);
+char		*set_remains(char **save, size_t offset);
+void		del_node(t_list_gnl **node);
+char		*append_buf(char const *save, char const *buf);
+size_t		ft_strlen(char const *s);
+char		*ft_strchr(char const *s, int c);
+size_t		ft_strlcpy(char *dst, char const *src, size_t dstsize);
 
 /* my own libft */
 typedef struct s_list_int
