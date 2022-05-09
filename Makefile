@@ -18,6 +18,8 @@ AR			:= ar
 ARFLAGS		:= -rcs
 RM			:= rm -f
 
+SRCSDIR		:= ./srcs
+
 SRCS	:= \
 		ft_atoi.c \
 		ft_bzero.c \
@@ -65,11 +67,7 @@ SRCS	:= \
 		get_next_line.c \
 		get_next_line_utils.c
 
-OBJS		= $(SRCS:.c=.o)
-
-ifdef BONUS
-	OBJS	+=	$(OBJS_BONUS)
-endif
+OBJS		= $(addprefix $(SRCSDIR)/,$(notdir $(SRCS:.c=.o)))
 
 .PHONY:		all clean fclean re
 
