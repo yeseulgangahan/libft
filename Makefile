@@ -52,27 +52,26 @@ SRCS	:= \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c
-
-SRCS_BONUS := \
-	ft_lstadd_back.c \
-	ft_lstadd_front.c \
-	ft_lstclear.c \
-	ft_lstdelone.c \
-	ft_lstiter.c \
-	ft_lstlast.c \
-	ft_lstmap.c \
-	ft_lstnew.c \
-	ft_lstsize.c
+		ft_toupper.c \
+		ft_lstadd_back.c \
+		ft_lstadd_front.c \
+		ft_lstclear.c \
+		ft_lstdelone.c \
+		ft_lstiter.c \
+		ft_lstlast.c \
+		ft_lstmap.c \
+		ft_lstnew.c \
+		ft_lstsize.c \
+		get_next_line.c \
+		get_next_line_utils.c
 
 OBJS		= $(SRCS:.c=.o)
-OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
 ifdef BONUS
 	OBJS	+=	$(OBJS_BONUS)
 endif
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re
 
 all:		$(NAME)
 
@@ -83,9 +82,6 @@ fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean all
-
-bonus:
-			$(MAKE) BONUS=true
 
 $(NAME):	$(OBJS)
 			$(AR) $(ARFLAGS) $@ $^
