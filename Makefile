@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/30 18:45:16 by yehan             #+#    #+#              #
-#    Updated: 2021/12/30 18:45:29 by yehan            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		:= libft.a
 
 CC			:= cc
@@ -65,7 +53,6 @@ SRCS	:= \
 		ft_lstnew.c \
 		ft_lstsize.c \
 		get_next_line.c \
-		get_next_line_utils.c
 
 OBJS		= $(addprefix $(SRCSDIR)/,$(notdir $(SRCS:.c=.o)))
 
@@ -74,7 +61,7 @@ OBJS		= $(addprefix $(SRCSDIR)/,$(notdir $(SRCS:.c=.o)))
 all:		$(NAME)
 
 clean:
-			$(RM) $(OBJS) $(OBJS_BONUS)
+			$(RM) $(OBJS)
 
 fclean:		clean
 			$(RM) $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: han-yeseul <han-yeseul@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:29:33 by yehan             #+#    #+#             */
-/*   Updated: 2022/01/26 14:31:21 by yehan            ###   ########.fr       */
+/*   Updated: 2022/05/16 19:27:44 by han-yeseul       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*read_iter(char **s_save, int fd)
 			break ;
 		buf[nread] = '\0';
 		temp = new;
-		new = append_buf(new, buf);
+		new = ft_strjoin(new, buf);
 		free(temp);
 	}
 	free(buf);
