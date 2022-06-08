@@ -52,6 +52,7 @@ SRCS	:= \
 		ft_lstmap.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
+		ft_errexit.c \
 		get_next_line.c \
 
 OBJS		= $(addprefix $(SRCSDIR)/,$(notdir $(SRCS:.c=.o)))
