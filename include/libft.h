@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:27:38 by yehan             #+#    #+#             */
-/*   Updated: 2022/06/08 13:30:00 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2022/06/09 14:16:56 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-void	ft_errexit(char *message);
+void	ft_err_exit(char *s);
 #endif
