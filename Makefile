@@ -1,7 +1,7 @@
 NAME		:= libft.a
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror -g
 AR			:= ar
 ARFLAGS		:= -rcs
 RM			:= rm -f
@@ -55,6 +55,8 @@ SRCS	:= \
 		ft_pstr_exit.c \
 		ft_perror_exit.c \
 		get_next_line.c \
+		ft_free_twoarr.c \
+		circular_linked_list.c
 
 OBJS		= $(addprefix $(SRCSDIR)/,$(notdir $(SRCS:.c=.o)))
 

@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:27:38 by yehan             #+#    #+#             */
-/*   Updated: 2022/06/15 15:36:03 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2022/06/28 07:47:57 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 void	ft_pstr_exit(char *s);
 void	ft_perror_exit(char *s);
+void	ft_free_twoarr(char **arr);
 #endif
