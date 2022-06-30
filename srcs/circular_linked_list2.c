@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_twoarr.c                                   :+:      :+:    :+:   */
+/*   circular_linked_list2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 13:19:10 by yehan             #+#    #+#             */
-/*   Updated: 2022/06/30 13:19:19 by yehan            ###   ########seoul.kr  */
+/*   Created: 2022/06/30 13:16:20 by yehan             #+#    #+#             */
+/*   Updated: 2022/06/30 13:45:58 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
+#include "../include/circular_linked_list.h"
 
-void	ft_free_twoarr(char **arr)
+int	clist_first(t_clist *plist, t_data *pdata)
 {
-	int	i;
+	if (plist->tail == NULL)
+		return (FALSE);
+	plist->before = plist->tail;
+	plist->cur = plist->tail->next;
+	*pdata = plist->cur->data;
+	return (TRUE);
+}
 
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+int	clist_next(t_clist *plist, t_data *pdata)
+{
+	if (plist->tail == NULL)
+		return (FALSE);
+	plist->before = plist->cur;
+	plist->cur = plist->cur->next;
+	*pdata = plist->cur->data;
+	return (TRUE);
 }

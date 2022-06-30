@@ -1,7 +1,17 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include "../include/libft.h"
-# include "../include/circular_linked_list.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   circular_linked_list.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/30 13:16:29 by yehan             #+#    #+#             */
+/*   Updated: 2022/06/30 13:46:01 by yehan            ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/libft.h"
+#include "../include/circular_linked_list.h"
 
 void	clist_init(t_clist *plist)
 {
@@ -13,12 +23,12 @@ void	clist_init(t_clist *plist)
 
 void	clist_insert_back(t_clist *plist, t_data data)
 {
- 	t_node	*newnode;
+	t_node	*newnode;
 
- 	newnode = malloc(sizeof(t_node));
- 	newnode->data = data;
- 	if (plist->tail == NULL)
- 	{
+	newnode = ft_calloc(1, sizeof(t_node));
+	newnode->data = data;
+	if (plist->tail == NULL)
+	{
 		plist->tail = newnode;
 		newnode->next = newnode;
 	}
@@ -34,7 +44,7 @@ void	clist_insert_back(t_clist *plist, t_data data)
 void	clist_insert_front(t_clist *plist, t_data data)
 {
 	t_node	*newnode;
-	
+
 	newnode = ft_calloc(1, sizeof(t_node));
 	newnode->data = data;
 	if (plist->tail == NULL)
@@ -50,30 +60,11 @@ void	clist_insert_front(t_clist *plist, t_data data)
 	(plist->num_of_data)++;
 }
 
-bool	clist_first(t_clist *plist, t_data *pdata)
-{
-	if (plist->tail == NULL)
-		return (false);
-	plist->before = plist->tail;
-	plist->cur = plist->tail->next;
-	*pdata = plist->cur->data;
-	return (true);
-}
-
-bool	clist_next(t_clist *plist, t_data *pdata)
-{
-	if (plist->tail == NULL)
-		return (false);
-	plist->before = plist->cur;
-	plist->cur = plist->cur->next;
-	*pdata = plist->cur->data;
-	return (true);
-}
-
 t_data	clist_remove(t_clist *plist)
 {
 	t_node	*rpos;
 	t_data	rdata;
+
 	rpos = plist->cur;
 	rdata = rpos->data;
 	if (rpos == plist->tail)
@@ -81,7 +72,7 @@ t_data	clist_remove(t_clist *plist)
 		if (plist->tail == plist->tail->next)
 			plist->tail = NULL;
 		else
-			plist->tail = plist->before;		
+			plist->tail = plist->before;
 	}
 	plist->before->next = plist->cur->next;
 	plist->cur = plist->before;
@@ -90,7 +81,7 @@ t_data	clist_remove(t_clist *plist)
 	return (rdata);
 }
 
-int		clist_count(t_clist *plist)
+int	clist_count(t_clist *plist)
 {
 	return (plist->num_of_data);
 }

@@ -56,7 +56,8 @@ SRCS	:= \
 		ft_perror_exit.c \
 		get_next_line.c \
 		ft_free_twoarr.c \
-		circular_linked_list.c
+		circular_linked_list.c \
+		circular_linked_list2.c
 
 OBJS		= $(addprefix $(SRCSDIR)/,$(notdir $(SRCS:.c=.o)))
 
