@@ -6,14 +6,14 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 11:12:31 by yehan             #+#    #+#             */
-/*   Updated: 2022/06/30 19:28:59 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2022/07/01 08:14:47 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_STACK_H
 # define PUSH_SWAP_STACK_H
 
-# include <stddef.h>
+# include "../include/libft.h"
 # include "./circular_linked_list.h"
 
 # define TRUE 1

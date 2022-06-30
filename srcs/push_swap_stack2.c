@@ -6,12 +6,10 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 11:06:04 by yehan             #+#    #+#             */
-/*   Updated: 2022/06/30 19:31:49 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2022/07/01 08:11:44 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
-#include "../include/libft.h"
 #include "../include/push_swap_stack.h"
 
 int	stack_is_ascending_order(t_stack *pstack, size_t len)
