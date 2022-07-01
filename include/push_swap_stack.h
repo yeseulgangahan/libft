@@ -6,7 +6,7 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 11:12:31 by yehan             #+#    #+#             */
-/*   Updated: 2022/07/01 08:14:47 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2022/07/01 14:19:14 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 typedef t_clist	t_stack;
 
-void	stack_init(t_stack *pstack);
 size_t	stack_count(t_stack *pstack);
 int		stack_peek(t_stack *pstack, t_data *pdata);
 int		stack_next(t_stack *pstack, t_data *pdata);

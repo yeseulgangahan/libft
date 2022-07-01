@@ -6,17 +6,11 @@
 /*   By: yehan <yehan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 11:06:07 by yehan             #+#    #+#             */
-/*   Updated: 2022/07/01 08:11:39 by yehan            ###   ########seoul.kr  */
+/*   Updated: 2022/07/01 14:18:44 by yehan            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap_stack.h"
-
-void	stack_init(t_stack *pstack)
-{
-	pstack = ft_calloc(1, sizeof(t_stack));
-	clist_init(pstack);
-}
 
 size_t	stack_count(t_stack *pstack)
 {
