@@ -78,4 +78,4 @@ C 라이브러리에는 없지만 유용한 함수들을 추가했습니다.
 <img width="532" alt="image" src="https://github.com/yeseulgangahan/libft/assets/88709878/b0b27f98-25da-4eae-89cd-6535238d60ab">
 
 ## Notion Post
-[libft를 위한 노트](https://probable-perch-892.notion.site/libft-b785e7033c7244538087baad369e49cb?pvs=4)
+공부한 내용을 [libft를 위한 노트](https://probable-perch-892.notion.site/libft-b785e7033c7244538087baad369e49cb?pvs=4)에 정리했습니다.
